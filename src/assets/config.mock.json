@@ -1,0 +1,11 @@
+{
+    "host": "fake",
+    "endpoints": {
+     	"login": {
+     		"proxyId": "/api/login"
+     	},
+     	"correlativos": {
+     		"proxyId": "/api/correlativos/correlativos"
+     	}
+    }
+}

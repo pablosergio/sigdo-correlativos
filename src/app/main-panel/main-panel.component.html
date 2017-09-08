@@ -1,0 +1,17 @@
+<div class="ui-g maxHeight">
+    <div class="ui-g-12 ui-g-nopad">
+        <div class="ui-g-12 ui-g-nopad">
+            <p-menubar [model]="items">
+    			<input type="text" pInputText placeholder="Search">
+    			<button pButton label="Logout" icon="fa-sign-out"></button>
+			</p-menubar>
+			<router-outlet></router-outlet>
+            <!-- <span *ngIf="objLoaderStatus">
+                <ngl-spinner size="large" type="brand" container="true"></ngl-spinner>
+            </span> -->
+        </div>
+    </div>
+    <footer class="ui-g-12 panel-footer">
+        Footer
+    </footer>
+</div>

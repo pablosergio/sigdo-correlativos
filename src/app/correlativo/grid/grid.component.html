@@ -1,0 +1,16 @@
+ <p-panel header="Title" [toggleable]="true">
+ 
+ <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+      <input #gb type="text" pInputText size="50" placeholder="Global Filter">
+       <p-splitButton [style]="{'float':'right'}" label="New" icon="fa-file-o" (onClick)="newRecord()"></p-splitButton> 
+    </div> 
+    <p-dataTable [value]="store" [rows]="8" [lazy]="true" (onLazyLoad)="loadData($event)" [totalRecords]="totalRecords" [paginator]="true" [globalFilter]="gb" selectionMode="single" [(selection)]="correlativo" #dt>
+      <p-column field="correlativo" header="Name" sortable="true" [filter]="true" filterPlaceholder="Search"></p-column>
+      <p-column field="isPrinted" header="Token"></p-column>
+      <p-column field="creation_date" header="Creation Date" [style]="{'text-align':'center'}"></p-column>
+      <p-footer><div style="text-align: left">Selected Correlativo: {{correlativo ? correlativo.correlativo: 'none'}}</div></p-footer>
+  </p-dataTable>
+  
+</p-panel>
+

@@ -1,0 +1,127 @@
+.help-block {
+    font-size: 12px;
+    color: red;
+}
+
+.icon-button {
+	margin-right: 6px;
+}
+
+.has-icon-left .form-control{
+	padding-right:.75rem;
+	padding-left:2.45rem
+}
+.has-icon-left .form-control.input-xl{
+	padding-right:.5rem;
+	padding-left:3.55rem
+}
+.has-icon-left .form-control.input-lg{
+	padding-right:1.5rem;
+	padding-left:3.166667rem
+}
+.has-icon-left .form-control.input-sm{
+	padding-right:.5rem;
+	padding-left:1.8125rem
+}
+.has-icon-left .form-control.input-xs{
+	padding-right:.275rem;
+	padding-left:1.525rem
+}
+.has-icon-left .form-control-position{
+	right:auto;
+	left:inherit
+}
+
+.form-control-position{
+	position:absolute;
+	top:0;
+	right:0;
+	z-index:2;
+	display:block;
+	width:2.5rem;
+	height:2.5rem;
+	line-height:2.5rem;
+	text-align:center
+}
+.form-control-position, input.form-control.input-xl+.form-control-position, select.form-control:not([size]):not([multiple]).form-group-xl>.form-control-position, select.form-control:not([size]):not([multiple]).input-xl+.form-control-position{
+	width:2.55rem;
+	height:2.55rem;
+	line-height:2.55rem
+}
+input.form-control.form-group-lg>.form-control-position,input.form-control.input-lg+.form-control-position,select.form-control:not([size]):not([multiple]).form-group-lg>.form-control-position,select.form-control:not([size]):not([multiple]).input-lg+.form-control-position{
+	width:3.166667rem;
+	height:3.166667rem;
+	line-height:3.166667rem
+}
+input.form-control.form-group-sm>.form-control-position,input.form-control.input-sm+.form-control-position,select.form-control:not([size]):not([multiple]).form-group-sm>.form-control-position,select.form-control:not([size]):not([multiple]).input-sm+.form-control-position{
+	width:1.8125rem;
+	height:1.8125rem;
+	line-height:1.8125rem
+}
+input.form-control.form-group-xs>.form-control-position,input.form-control.input-xs+.form-control-position,select.form-control:not([size]):not([multiple]).form-group-xs>.form-control-position, select.form-control:not([size]):not([multiple]).input-xs+.form-control-position{
+	width:1.525rem;
+	height:1.525rem;
+	line-height:1.525rem
+}
+
+.position-relative{
+	position:relative!important
+}
+
+.card-header{
+	background-color:#fff;
+	color:#fff
+}
+.handle, .titleArea{
+	cursor:move
+}
+.card-header{
+	border-bottom:1px solid #fff
+}
+.card-header .card-title{
+	margin-bottom:0
+}
+.card-header .heading-elements,.card-header .heading-elements-toggle{
+	background-color:inherit;
+	position:absolute;
+	top:14px;right:21px
+}
+.card-header .heading-elements-toggle.heading-top-elements,.card-header .heading-elements.heading-top-elements{
+	top:0
+}
+.card-header .heading-elements i,.card-header .heading-elements-toggle i{
+	color:#fff
+}
+.card-header .heading-elements a,.card-header .heading-elements-toggle a{
+	padding:0 8px
+}
+
+.card-title{
+	text-transform:capitalize;
+	font-weight:600;
+	letter-spacing:.4px
+}
+.card-title{
+	margin-bottom:0
+}
+
+#logo {
+	width: 380px;
+	height: 35px;
+}
+
+.line-on-side{
+	border-bottom:1px solid #DADADA;
+	line-height:.1em;
+	margin:40px 0 20px
+}
+.line-on-side span{
+	background:#FFF;
+	padding:0 10px
+}
+.font-small-3 {
+    font-size: .9rem!important;
+}
+.text-xs-center {
+    text-align: center!important;
+}

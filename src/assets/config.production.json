@@ -1,0 +1,8 @@
+{
+    "host": "192.168.30.64:8080",
+     "endpoints": {
+     	"applicationSettings": {
+     		"proxyId": "/api/applicationSettings"
+     	}
+     }
+}

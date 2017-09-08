@@ -1,0 +1,31 @@
+<app-window-dialog [(visible)]="showDialog" [closable]="false" [header]="false" [footer]="false">
+<div class="col-md-10 col-md-offset-1">
+    <div class="card-header no-border">
+                <div class="card-title text-xs-center">
+                    <div class="p-1"><img id="logo" src="assets/images/logo.png" alt="branding logo"></div>
+                </div>
+                <h6 class="card-subtitle line-on-side text-muted text-xs-center font-small-3 pt-2"><span>Account Details</span></h6>
+    </div>
+    <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+        <fieldset class="form-group position-relative has-icon-left" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+            <input type="text" class="form-control" placeholder="Your Username" name="username" [(ngModel)]="model.username" #username="ngModel" required>
+            <div class="form-control-position"><i class="fa fa-user"></i></div>
+             <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>    
+        </fieldset>
+        
+        <fieldset class="form-group position-relative has-icon-left" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+            <input type="password" class="form-control" placeholder="Enter Password" name="password" [(ngModel)]="model.password" #password="ngModel" required>
+            <div class="form-control-position"><i class="fa fa-key"></i></div>
+            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>    
+        </fieldset>
+        
+        <div class="form-group">
+            <button [disabled]="loading" class="btn btn-outline-primary btn-block"><i class="fa fa-unlock icon-button"></i>Login
+            <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" /></button>
+        </div>
+        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    </form>
+</div>
+</app-window-dialog> 
+
+<!-- https://github.com/cornflourblue/angular2-jwt-authentication-example/tree/master/app -->
