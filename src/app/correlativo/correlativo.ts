@@ -1,5 +1,5 @@
 export class Correlativo {
-  id: number;
+  id: string;
   correlativo: string;
   isPrinted: boolean;
   creation_date: Date;

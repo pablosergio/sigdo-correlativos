@@ -216,7 +216,7 @@ export class DataService<T> {
 
   private extractOneData(res: Response) {
     const body = res.json();
-    return body.data || { };
+    return body.data || body;
   }
 
   private handleError (error: Response | any) {
@@ -246,6 +246,7 @@ export class DataService<T> {
   }
 }
 
+
 export class DataTable<T> {
   errorMessage: string;
   store: T[];
@@ -258,29 +259,6 @@ export class DataTable<T> {
     protected service: DataService<T>, protected loaderService: LoaderService) {
     this.itemsPerPage = 10;
   }
-
-  /*ngOnInit() {
-    this.currentPage = 1;
-    this.route.data
-      .subscribe((data: { data: PageResponse<T> }) => {
-          this.store = data.data.rows,
-          this.totalRecords = data.data.total,
-          error =>  this.errorMessage = <any>error
-    });
- }*/
-
-  /*onSelect(application: SettingApplications) {
-    //this.router.navigate(['/setting-applications', application.application_id]);
-    this.selectedId = application.application_id;
-
-    // Navigate with relative link
-    this.router.navigate([application.application_id], { relativeTo: this.route });
-
-  }
-
-  isSelected(application: SettingApplications) {
-    return application.application_id === this.selectedId;
-  }*/
 
   public pageChanged(page: number): number {
    /* this method will trigger every page click */
@@ -297,18 +275,7 @@ export class DataTable<T> {
 
   public reload() {
     console.log('reload');
-    /*this.loadData(this.currentFilter);
-    this.loaderService.displayLoader(true);
-    this.service.getAll({ start: ((this.currentPage-1) * this.itemsPerPage) , limit: this.itemsPerPage})
-    .subscribe(
-        result => {
-          this.store = result.rows,
-          this.totalRecords = result.total,
-          this.loaderService.displayLoader(false)
-        },
-        error => this.errorMessage = <any>error
-      )
-    return this.currentPage;*/
+    this.loadData(this.currentFilter);
   }
 
   public loadData(event) {

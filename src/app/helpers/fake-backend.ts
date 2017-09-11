@@ -1,22 +1,13 @@
 import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
+import { UUID } from 'angular2-uuid';
 
 export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOptions) {
+    let correlativos: any[] = JSON.parse(localStorage.getItem('correlativos')) || [];
     // configure fake backend
     backend.connections.subscribe((connection: MockConnection) => {
         const testUser = { username: 'palvarado', password: 'palvarado', firstName: 'Test', lastName: 'User' };
-        const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhbHZhcmFkbyIsInBhc3N3b3JkIjoicGFsdm' +
-          'FyYWRvIiwibWVudSI6W3sibWVudV9vcGNpb25faWQiOjEsIm9wY2lvbiI6IkluaWNpbyIsImhyZWYiOiJyYWR0b29scy5ob21lIiwiYWxpYX' +
-          'MiOm51bGwsInRvb2x0aXAiOm51bGwsImljb25vIjoiaW9uIGlvbi1pb3MtaG9tZSIsIm9wY2lvbl9wYWRyZSI6bnVsbCwicG9zaWNpb24' +
-          'iOjEsImVzdGFkbyI6IkFDVElWTyIsInVzdWFyaW9fbWVudV9vcGNpb25faWQiOjEsInVzZXJuYW1lIjoicGFsdmFyYWRvIiwiZmVjaGFf' +
-          'cmVnaXN0cm8iOiIyMDE3LTAxLTAyVDIzOjM3OjIxLjM5MVoifSx7Im1lbnVfb3BjaW9uX2lkIjoyLCJvcGNpb24iOiJHZW5lcmFyIiwiaH' +
-          'JlZiI6InJhZHRvb2xzLmJ1aWx0IiwiYWxpYXMiOm51bGwsInRvb2x0aXAiOm51bGwsImljb25vIjoiaW9uIGlvbi1zZXR0aW5ncyIsIm9wY' +
-          '2lvbl9wYWRyZSI6bnVsbCwicG9zaWNpb24iOjIsImVzdGFkbyI6IkFDVElWTyIsInVzdWFyaW9fbWVudV9vcGNpb25faWQiOjIsInVzZXJuY' +
-          'W1lIjoicGFsdmFyYWRvIiwiZmVjaGFfcmVnaXN0cm8iOiIyMDE3LTAxLTAyVDIzOjM3OjIxLjM5MVoiLCJzdWJtZW51IjpbeyJtZW51X29wY2' +
-          'lvbl9pZCI6Mywib3BjaW9uIjoiQXJjaGl2b3MiLCJocmVmIjoicmFkdG9vbHMuZmlsZXMiLCJhbGlhcyI6bnVsbCwidG9vbHRpcCI6bnVsbCw' +
-          'iaWNvbm8iOiJpb24gaW9uLWRvY3VtZW50LXRleHQiLCJvcGNpb25fcGFkcmUiOjIsInBvc2ljaW9uIjoxLCJlc3RhZG8iOiJBQ1RJVk8iLCJ1c' +
-          '3VhcmlvX21lbnVfb3BjaW9uX2lkIjozLCJ1c2VybmFtZSI6InBhbHZhcmFkbyIsImZlY2hhX3JlZ2lzdHJvIjoiMjAxNy0wMS0wMlQyMzozNzoy' +
-          'MS4zOTFaIn1dfV0sImlhdCI6MTUwNDg5MTg5MCwiZXhwIjoxNTA0OTc4MjkwfQ.X2a-_wLawikjBnbvvIv89V4EKA_jVyUfpavkYDvlV9o';
+        const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBhbHZhcmFkbyIsInBhc3N3b3JkIjoicGFsdmFyYWRvIiwibWVudSI6W3sibWVudV9vcGNpb25faWQiOjEsIm9wY2lvbiI6IkluaWNpbyIsImhyZWYiOiJyYWR0b29scy5ob21lIiwiYWxpYXMiOm51bGwsInRvb2x0aXAiOm51bGwsImljb25vIjoiaW9uIGlvbi1pb3MtaG9tZSIsIm9wY2lvbl9wYWRyZSI6bnVsbCwicG9zaWNpb24iOjEsImVzdGFkbyI6IkFDVElWTyIsInVzdWFyaW9fbWVudV9vcGNpb25faWQiOjEsInVzZXJuYW1lIjoicGFsdmFyYWRvIiwiZmVjaGFfcmVnaXN0cm8iOiIyMDE3LTAxLTAyVDIzOjM3OjIxLjM5MVoifSx7Im1lbnVfb3BjaW9uX2lkIjoyLCJvcGNpb24iOiJHZW5lcmFyIiwiaHJlZiI6InJhZHRvb2xzLmJ1aWx0IiwiYWxpYXMiOm51bGwsInRvb2x0aXAiOm51bGwsImljb25vIjoiaW9uIGlvbi1zZXR0aW5ncyIsIm9wY2lvbl9wYWRyZSI6bnVsbCwicG9zaWNpb24iOjIsImVzdGFkbyI6IkFDVElWTyIsInVzdWFyaW9fbWVudV9vcGNpb25faWQiOjIsInVzZXJuYW1lIjoicGFsdmFyYWRvIiwiZmVjaGFfcmVnaXN0cm8iOiIyMDE3LTAxLTAyVDIzOjM3OjIxLjM5MVoiLCJzdWJtZW51IjpbeyJtZW51X29wY2lvbl9pZCI6Mywib3BjaW9uIjoiQXJjaGl2b3MiLCJocmVmIjoicmFkdG9vbHMuZmlsZXMiLCJhbGlhcyI6bnVsbCwidG9vbHRpcCI6bnVsbCwiaWNvbm8iOiJpb24gaW9uLWRvY3VtZW50LXRleHQiLCJvcGNpb25fcGFkcmUiOjIsInBvc2ljaW9uIjoxLCJlc3RhZG8iOiJBQ1RJVk8iLCJ1c3VhcmlvX21lbnVfb3BjaW9uX2lkIjozLCJ1c2VybmFtZSI6InBhbHZhcmFkbyIsImZlY2hhX3JlZ2lzdHJvIjoiMjAxNy0wMS0wMlQyMzozNzoyMS4zOTFaIn1dfV0sImlhdCI6MTUwNTEzMzM3OSwiZXhwIjoxNTA1MjE5Nzc5fQ.qDal2SmS3MatpbcPP-44WMiuWRfEKX98pHBjK7JKw7g';
         // wrap in timeout to simulate server api call
         setTimeout(() => {
 
@@ -30,9 +21,8 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
                         new ResponseOptions({ status: 200, body: { success: true, token: TOKEN } })
                     ));
                 } else {
-                    connection.mockRespond(new Response(
-                        new ResponseOptions({ status: 200 })
-                    ));
+                    // else return 400 bad request
+                    connection.mockError(new Error('Username or password is incorrect'));
                 }
             }
 
@@ -40,14 +30,39 @@ export function fakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
             if (connection.request.url.startsWith('/api/correlativos') && connection.request.method === RequestMethod.Get) {
                 // check for fake auth token in header and return test users if valid, this security is implemented server side
                 // in a real application
-                 if (connection.request.headers.get('Authorization') === 'Bearer ' + TOKEN) {
+                if (connection.request.headers.get('Authorization') === 'Bearer ' + TOKEN) {
                     connection.mockRespond(new Response(
                         new ResponseOptions({ status: 200, body: {
                                   success: true,
-                                  rows: [
-                                    { id: 1, correlativo: 'CEN-10001', creation_date: new Date(), isPrinted: false }
-                                  ],
-                                  total: 1
+                                  rows: correlativos,
+                                  total: correlativos.length
+                                }
+                        })
+                    ));
+                } else {
+                    // return 401 not authorised if token is null or invalid
+                    connection.mockRespond(new Response(
+                        new ResponseOptions({ status: 401 })
+                    ));
+                }
+            }
+
+            if (connection.request.url.startsWith('/api/correlativos') && connection.request.method === RequestMethod.Post) {
+                // check for fake auth token in header and return test users if valid, this security is implemented server side
+                // in a real application
+                if (connection.request.headers.get('Authorization') === 'Bearer ' + TOKEN) {
+                    // get new correlativo object from post body
+                    let newCorrelativo = JSON.parse(connection.request.getBody());
+
+                    // save new user
+                    newCorrelativo.correlativo = correlativos.length + 1;
+                    correlativos.push(newCorrelativo);
+                    localStorage.setItem('correlativos', JSON.stringify(correlativos));
+                    connection.mockRespond(new Response(
+                        new ResponseOptions({ status: 200, body: {
+                                  success: true,
+                                  msg: 'Proceso ejecutado con exito',
+                                  id: newCorrelativo.id
                                 }
                         })
                     ));

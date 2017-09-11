@@ -3,8 +3,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { AppConfig } from './config/app.config';
-import { HttpModule, RequestOptions } from '@angular/http';
-import { AuthHttp, AuthConfig, AUTH_PROVIDERS, provideAuth } from 'angular2-jwt';
+import { Http, HttpModule, RequestOptions } from '@angular/http';
+import { AuthHttp, AuthConfig, AUTH_PROVIDERS } from 'angular2-jwt';
 // used to create fake backend
 import { fakeBackendProvider } from './helpers/fake-backend';
 import { MockBackend, MockConnection } from '@angular/http/testing';
@@ -17,6 +17,17 @@ import {SplitButtonModule} from 'primeng/primeng';
 import { SharedModule } from './common/shared';
 import { LoginModule } from './login/login.module';
 import { AppComponent } from './app.component';
+
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp(new AuthConfig({
+      headerName: 'Authorization',
+      headerPrefix: 'Bearer',
+      tokenName: 'token',
+      tokenGetter: (() => localStorage.getItem('token')),
+      globalHeaders: [{ 'Content-Type': 'application/json' }],
+      noJwtError: true
+  }), http, options);
+}
 
 @NgModule({
   declarations: [
@@ -34,15 +45,11 @@ import { AppComponent } from './app.component';
  providers: [
     AppConfig,
     { provide: APP_INITIALIZER, useFactory: loadConfig, deps: [AppConfig], multi: true },
-    AuthHttp,
-    provideAuth({
-            headerName: 'Authorization',
-            headerPrefix: 'Bearer',
-            tokenName: 'token',
-            tokenGetter: (() => localStorage.getItem('token')),
-            globalHeaders: [{ 'Content-Type': 'application/json' }],
-            noJwtError: true
-    }),
+    {
+      provide: AuthHttp,
+      useFactory: authHttpServiceFactory,
+      deps: [Http, RequestOptions]
+    },
     AuthService,
     AuthGuardService,
     LoggerService,
