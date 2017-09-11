@@ -260,9 +260,9 @@ export class DataTable<T> {
     this.itemsPerPage = 10;
   }
 
-  public pageChanged(page: number): number {
+  /*public pageChanged(page: number): number {
    /* this method will trigger every page click */
-     this.service.getAll({ start: ((page - 1) * this.itemsPerPage) , limit: this.itemsPerPage })
+  /*   this.service.getAll({ start: ((page - 1) * this.itemsPerPage) , limit: this.itemsPerPage })
      .subscribe(
            result => {
             this.store = result.rows,
@@ -271,14 +271,10 @@ export class DataTable<T> {
           error => this.errorMessage = <any>error
       );
       return page;
-  }
-
-  public reload() {
-    console.log('reload');
-    this.loadData(this.currentFilter);
-  }
+  }*/
 
   public loadData(event) {
+    console.log('iniciando grid');
     this.loaderService.displayLoader(true);
     this.currentFilter = event;
     this.service.getAll(this.transformParams(event))

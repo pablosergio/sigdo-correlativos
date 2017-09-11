@@ -22,7 +22,6 @@ export class GridComponent extends DataTable<Correlativo> implements OnInit {
     dataService.endpoint = 'correlativos',
     dataService.communication.update$.subscribe(
       result => {
-        this.reload();
       });
   }
 
@@ -40,15 +39,9 @@ export class GridComponent extends DataTable<Correlativo> implements OnInit {
    this.nuevoCorrelativo.isPrinted = false;
    this.nuevoCorrelativo.creation_date = new Date();
    this.service.save(this.nuevoCorrelativo).subscribe(
-       result => this.gotoCorrelativos(),
+       result => this.loadData(this.currentFilter),
        error =>  this.errorMessage = <any>error
    );
  }
-
- gotoCorrelativos() {
-  // Relative navigation back to the Setting Applications
- // this.router.navigate([''], { relativeTo: this.route });
-  this.loadData();
-}
 
 }
