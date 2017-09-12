@@ -274,7 +274,6 @@ export class DataTable<T> {
   }*/
 
   public loadData(event) {
-    console.log('iniciando grid');
     this.loaderService.displayLoader(true);
     this.currentFilter = event;
     this.service.getAll(this.transformParams(event))
