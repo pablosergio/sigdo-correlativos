@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GridComponent } from './grid/grid.component';
+import { GridCorrelativoComponent } from './grid-correlativo/grid-correlativo.component';
 
 
 const correlativoRoutes: Routes = [
    {
     path: '',
-    component: GridComponent,
+    component: GridCorrelativoComponent,
     /*children: [
       {
         path: '',

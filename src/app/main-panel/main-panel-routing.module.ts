@@ -13,6 +13,10 @@ const mainPanelRoutes: Routes = [
       {
         path: 'correlativos',
         loadChildren: 'app/correlativo/correlativo.module#CorrelativoModule'
+      },
+      {
+        path: 'oficinas',
+        loadChildren: 'app/oficina/oficina.module#OficinaModule'
       }
     ]
   }

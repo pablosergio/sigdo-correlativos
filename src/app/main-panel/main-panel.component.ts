@@ -18,7 +18,7 @@ export class MainPanelComponent implements OnInit {
     this.items = [
             {
                 label: 'Correspondencia',
-                icon: 'fa-cog ',
+                icon: 'fa-envelope',
                 items: [
                         {
                           label: 'Correlativos',
@@ -30,14 +30,18 @@ export class MainPanelComponent implements OnInit {
                 ]
             },
             {
-                label: 'Edit',
-                icon: 'fa-edit',
+                label: 'Configuracion',
+                icon: 'fa-cog',
                 items: [
-                    { label: 'Undo', icon: 'fa-mail-forward' },
+                    { label: 'Oficinas', icon: 'fa-building-o', routerLink: ['/main/oficinas'] },
                     { label: 'Redo', icon: 'fa-mail-reply' }
                 ]
             }
         ];
   }
 
+  logout(): void {
+    localStorage.removeItem('token');
+    window.location.reload();
+  }
 }

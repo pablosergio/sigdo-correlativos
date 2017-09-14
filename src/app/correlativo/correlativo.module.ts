@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CorrelativoRoutingModule } from './correlativo-routing.module';
 import { CorrelativoService } from './correlativo.service';
-import { GridComponent } from './grid/grid.component';
+import { GridCorrelativoComponent } from './grid-correlativo/grid-correlativo.component';
 import { PanelModule, DataTableModule, DropdownModule, ButtonModule, GrowlModule } from 'primeng/primeng';
 
 @NgModule({
@@ -16,7 +16,7 @@ import { PanelModule, DataTableModule, DropdownModule, ButtonModule, GrowlModule
     GrowlModule
   ],
   declarations: [
-    GridComponent
+    GridCorrelativoComponent
   ],
   providers: [
     CorrelativoService
